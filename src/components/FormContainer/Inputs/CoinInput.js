@@ -1,7 +1,8 @@
 import { Input } from '@/components';
 import { Store } from '@/store';
+import { injectable } from '@/utils/di';
 
-export class CoinInput extends Input {
+class CoinInputComponent extends Input {
   #store;
 
   constructor(store) {
@@ -19,3 +20,5 @@ export class CoinInput extends Input {
     this.setValue(this.#store.getState().coinInput);
   }
 }
+
+export const CoinInput = injectable(CoinInputComponent);

@@ -2,8 +2,9 @@ import { Store } from '@/store';
 import { CoinsService } from '@/services';
 import { roundCoin, Events, TagNames, Titles } from '@/utils';
 import { CommonComponent } from '@/components';
+import { injectable } from '@/utils/di';
 
-export class ExchangeButton extends CommonComponent {
+export class ExchangeButtonComponent extends CommonComponent {
   #store;
 
   #service;
@@ -25,6 +26,11 @@ export class ExchangeButton extends CommonComponent {
     return this.getComponent();
   }
 
+  update() {
+    const { isLoading } = this.#store.getState();
+    this.isDisabled(isLoading);
+  }
+
   #exchange(event) {
     event.preventDefault();
     const { currencyInput } = this.#store.getState();
@@ -38,3 +44,5 @@ export class ExchangeButton extends CommonComponent {
     return coin?.price;
   }
 }
+
+export const ExchangeButton = injectable(ExchangeButtonComponent);

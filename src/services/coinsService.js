@@ -1,8 +1,9 @@
 import { Store } from '@/store';
 import { HttpClient } from '@/utils';
 import { environments } from '@/environments';
+import { injectable } from '@/utils/di';
 
-export class CoinsService {
+class Service {
   #logger;
 
   #store;
@@ -30,3 +31,5 @@ export class CoinsService {
       .catch(err => this.#logger.error(err));
   }
 }
+
+export const CoinsService = injectable(Service);

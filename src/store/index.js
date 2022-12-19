@@ -28,6 +28,8 @@ export class Store extends Observable {
 
   #currencyInput = 1;
 
+  static instance;
+
   getState() {
     return {
       isLoading: this.#isLoading,
@@ -52,5 +54,12 @@ export class Store extends Observable {
   setSelects({ currentCoin, currentCurrency }) {
     this.#currentCurrency = currentCurrency || this.#currentCurrency;
     this.#currentCoin = currentCoin || this.#currentCoin;
+  }
+
+  static getInstance() {
+    if (!this.instance) {
+      this.instance = new Store();
+    }
+    return this.instance;
   }
 }
