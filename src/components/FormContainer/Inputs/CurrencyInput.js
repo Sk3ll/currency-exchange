@@ -1,6 +1,7 @@
 import { Input } from '@/components';
+import { injectable } from '@/utils/di';
 
-export class CurrencyInput extends Input {
+export class CurrencyInputComponent extends Input {
   constructor(store) {
     super(store);
   }
@@ -9,3 +10,5 @@ export class CurrencyInput extends Input {
     return super.render('initial-value', 'currencyInput', true);
   }
 }
+
+export const CurrencyInput = injectable(CurrencyInputComponent);

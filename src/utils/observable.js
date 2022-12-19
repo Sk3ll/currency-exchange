@@ -1,11 +1,11 @@
 export class Observable {
   #observers = [];
 
-  attach(observer) {
+  subscribe(observer) {
     this.#observers.push(observer);
   }
 
-  detach(observer) {
+  unsubscribe(observer) {
     this.#observers = this.#observers.filter(o => o !== observer);
   }
 

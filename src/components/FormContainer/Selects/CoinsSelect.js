@@ -2,8 +2,9 @@ import { Select } from '@/components';
 import { Store } from '@/store';
 import { CoinsService } from '@/services';
 import { Titles } from '@/utils';
+import { injectable } from '@/utils/di';
 
-export class CoinsSelect extends Select {
+export class CoinsSelectComponent extends Select {
   #coinsService;
 
   #store;
@@ -32,3 +33,5 @@ export class CoinsSelect extends Select {
     }
   }
 }
+
+export const CoinsSelect = injectable(CoinsSelectComponent);

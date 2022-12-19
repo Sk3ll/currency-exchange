@@ -4,8 +4,9 @@ import { CurrenciesSelect } from './CurrenciesSelect';
 import { TagNames } from '@/utils';
 import { Store } from '@/store';
 import { CoinsService } from '@/services';
+import { injectable } from '@/utils/di';
 
-export class SelectsWrapper extends CommonComponent {
+class SelectsWrapperComponent extends CommonComponent {
   #service;
 
   #store;
@@ -23,8 +24,10 @@ export class SelectsWrapper extends CommonComponent {
   render() {
     const currenciesSelectInstance = new CurrenciesSelect(this.#service, this.#store);
     const coinsSelectInstance = new CoinsSelect(this.#service, this.#store);
-    this.#store.attach(coinsSelectInstance);
+    this.#store.subscribe(coinsSelectInstance);
     this.addClassName('currency').appendChildren(currenciesSelectInstance.render(), coinsSelectInstance.render());
     return this.getComponent();
   }
 }
+
+export const SelectsWrapper = injectable(SelectsWrapperComponent);

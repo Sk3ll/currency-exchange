@@ -5,8 +5,9 @@ import { CoinInput } from './CoinInput';
 import { TagNames } from '@/utils';
 import { Store } from '@/store';
 import { CoinsService } from '@/services';
+import { injectable } from '@/utils/di';
 
-export class InputsWrapper extends CommonComponent {
+class InputsWrapperComponent extends CommonComponent {
   #service;
 
   #store;
@@ -22,10 +23,11 @@ export class InputsWrapper extends CommonComponent {
   }
 
   render() {
-    const currencyInputInstance = new CurrencyInput(this.#store);
-    const exchangeButtonInstance = new ExchangeButton(this.#service, this.#store);
-    const coinInputInstance = new CoinInput(this.#store);
-    this.#store.attach(coinInputInstance);
+    const currencyInputInstance = new CurrencyInput();
+    const exchangeButtonInstance = new ExchangeButton();
+    const coinInputInstance = new CoinInput();
+    this.#store.subscribe(coinInputInstance);
+    this.#store.subscribe(exchangeButtonInstance);
     this.addClassName('input-exchange-value').appendChildren(
       currencyInputInstance.render(),
       coinInputInstance.render(),
@@ -34,3 +36,5 @@ export class InputsWrapper extends CommonComponent {
     return this.getComponent();
   }
 }
+
+export const InputsWrapper = injectable(InputsWrapperComponent);
